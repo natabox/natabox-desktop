@@ -16,17 +16,25 @@ const createWindow = () => {
     width: 1200,
     height: 800,
     webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
       devTools: false,
     },
     icon: __dirname + '/logoalt.png',
   });
 
-  mainWindow.loadURL('https://natabox.github.io/box/');
+  mainWindow.loadURL('https://technata.com.br/box');
   mainWindow.removeMenu();
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.show();
   })
   loadingScreen.close();
+  ipcMain.on('progress', (evt, arg) => {
+    mainWindow.setProgressBar(arg / 100)
+  })
+  ipcMain.on('remove-progress', (evt, arg) => {
+    mainWindow.setProgressBar(-1)
+  })
 };
 
 let loadingScreen;

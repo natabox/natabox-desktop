@@ -10,7 +10,7 @@ function load() {
             if (txt == 'Works') {
                 setTimeout(() => {
                     ipcRenderer.send('app-loaded')
-                }, 2000)
+                }, 0)
                 return
             }
             load()
